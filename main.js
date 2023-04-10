@@ -1,6 +1,6 @@
 
-let start = '2023-04-10 19:40';
-let end = '2023-04-11 19:45';
+let start = '2023-04-10 18:50';
+let end = '2023-04-11 10:40';
 
 const weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
@@ -40,6 +40,8 @@ for(let currentDay = firstDate.getTime(); currentDay < secondDate.getTime(); cur
             minutesCount += numberOfMinutesInWorkingDay;
         }else if(firstDate.getHours() >= 9 && firstDate.getHours() < 18) {
             minutesCount += (18 - firstDate.getHours()) * 60 - firstDate.getMinutes();
+        }else{
+            minutesCount += numberOfMinutesInWorkingDay;
         }
         first = false;
     }

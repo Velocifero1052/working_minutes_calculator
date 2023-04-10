@@ -1,6 +1,6 @@
 
-let start = '2023-04-10 14:40';
-let end = '2023-04-13 16:40';
+let start = '2023-04-10 19:40';
+let end = '2023-04-11 19:45';
 
 const weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
@@ -20,27 +20,43 @@ let firstDate = new Date(+firstYearMonthDay[0], +firstYearMonthDay[1], +firstYea
 let secondDate = new Date(+secondYearMonthDay[0], +secondYearMonthDay[1], +secondYearMonthDay[2],
     +secondHourMinutes[0], +secondHourMinutes[1]);
 
-
 console.log("Start: " + weekday[firstDate.getDay()] + " at " + firstDate.getHours() + ":" + firstDate.getMinutes());
 console.log("End: " + weekday[secondDate.getDay()] + " at " + secondDate.getHours() + ":" + secondDate.getMinutes());
-
-//adding days
-console.log(firstDate);
-firstDate.setDate(firstDate.getDate() + 1);
-console.log(firstDate);
 
 let first = true;
 let last = false;
 
-for(let currentDay = firstDate.getTime(); currentDay < secondDate.getTime(); currentDay += 86_400_000){
-    if(first){
+let minutesCount = 0;
+const numberOfMillsInDay = 86_400_000;
+const numberOfMinutesInWorkingDay = 540;
 
+for(let currentDay = firstDate.getTime(); currentDay < secondDate.getTime(); currentDay += numberOfMillsInDay){
+
+    if(currentDay.getDay === 0 || currentDay.getDay === 6)
+        continue;
+
+    if(first) {
+        if(firstDate.getHours() < 9){
+            minutesCount += numberOfMinutesInWorkingDay;
+        }else if(firstDate.getHours() >= 9 && firstDate.getHours() < 18) {
+            minutesCount += (18 - firstDate.getHours()) * 60 - firstDate.getMinutes();
+        }
+        first = false;
     }
 
-
-
+    last = (currentDay + numberOfMillsInDay) >= secondDate.getTime();
+    if(last){
+        if(secondDate.getHours() < 9){
+            minutesCount -= numberOfMinutesInWorkingDay;
+        }else if(secondDate.getHours() >= 9 && secondDate.getHours() < 18) {
+            minutesCount -= (18 - secondDate.getHours()) * 60 - secondDate.getMinutes();
+        }
+        break;
+    }
+    minutesCount += numberOfMinutesInWorkingDay;
 }
 
+console.log("Working minutes spent on work: " + minutesCount);
 
 
 

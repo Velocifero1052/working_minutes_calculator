@@ -41,21 +41,8 @@ function runTests(testData, testTitle){
 function defineNumberOfMinutes(start_, end_){
     const weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
-    let startDateAndTime = start_.split(' ');
-    let endDateAndTime = end_.split(' ');
-
-    let startYearAndMonth = startDateAndTime[0].split('-');
-    let startHourMinutes = startDateAndTime[1].split(':');
-
-    let endYearAndMonth = endDateAndTime[0].split('-');
-    let endHourMinutes = endDateAndTime[1].split(':');
-
-
-    let startDate = new Date(+startYearAndMonth[0], +(startYearAndMonth[1])-1, +startYearAndMonth[2],
-        +startHourMinutes[0], +startHourMinutes[1]);
-
-    let endDate = new Date(+endYearAndMonth[0], +(endYearAndMonth[1])-1, +endYearAndMonth[2],
-        +endHourMinutes[0], +endHourMinutes[1]);
+    let startDate = new Date(start_);
+    let endDate = new Date(end_);
 
     console.log("Start: " + weekday[startDate.getDay()] + " at " + startDate.getHours() + ":" + startDate.getMinutes());
     console.log("End: " + weekday[endDate.getDay()] + " at " + endDate.getHours() + ":" + endDate.getMinutes());

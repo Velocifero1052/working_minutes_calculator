@@ -51,10 +51,10 @@ function defineNumberOfMinutes(start_, end_){
     let endHourMinutes = endDateAndTime[1].split(':');
 
 
-    let startDate = new Date(+startYearAndMonth[0], +startYearAndMonth[1], +startYearAndMonth[2],
+    let startDate = new Date(+startYearAndMonth[0], +(startYearAndMonth[1])-1, +startYearAndMonth[2],
         +startHourMinutes[0], +startHourMinutes[1]);
 
-    let endDate = new Date(+endYearAndMonth[0], +endYearAndMonth[1], +endYearAndMonth[2],
+    let endDate = new Date(+endYearAndMonth[0], +(endYearAndMonth[1])-1, +endYearAndMonth[2],
         +endHourMinutes[0], +endHourMinutes[1]);
 
     console.log("Start: " + weekday[startDate.getDay()] + " at " + startDate.getHours() + ":" + startDate.getMinutes());
@@ -153,9 +153,11 @@ nextDayTestData.push(new Interval('2023-04-10 15:00', '2023-04-11 08:00', 180));
 nextDayTestData.push(new Interval('2023-04-10 19:00', '2023-04-11 10:00', 60));
 
 daysWithIntervalTestData.push(new Interval('2023-04-10 08:40', '2023-04-12 09:20', 1100));
-daysWithIntervalTestData.push(new Interval('2023-04-10 08:40', '2023-04-13 09:20', 1620));
-daysWithIntervalTestData.push(new Interval('2023-04-12 17:40', '2023-04-15 09:20', 40));
-daysWithIntervalTestData.push(new Interval('2023-04-12 17:40', '2023-04-16 09:20', 580));
+daysWithIntervalTestData.push(new Interval('2023-04-10 08:40', '2023-04-13 09:20', 1640));
+daysWithIntervalTestData.push(new Interval('2023-04-12 17:40', '2023-04-15 09:20', 1100));
+daysWithIntervalTestData.push(new Interval('2023-04-12 17:40', '2023-04-16 09:20', 1100));
+daysWithIntervalTestData.push(new Interval('2023-04-14 17:40', '2023-04-17 09:40', 60));
+daysWithIntervalTestData.push(new Interval('2023-04-14 17:40', '2023-04-15 09:40', 20));
 
 runTests(sameDayTestData, "Tests for same day intervals");
 runTests(nextDayTestData, "Tests for next day intervals");
